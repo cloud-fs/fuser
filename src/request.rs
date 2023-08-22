@@ -27,6 +27,7 @@ pub struct Request<'a> {
     /// Channel sender for sending the reply
     ch: ChannelSender,
     /// Request raw data
+    #[allow(unused)]
     data: &'a [u8],
     /// Parsed request
     request: ll::AnyRequest<'a>,
@@ -272,8 +273,8 @@ impl<'a> Request<'a> {
                 se.filesystem.symlink(
                     self,
                     self.request.nodeid().into(),
-                    x.target().as_ref(),
-                    Path::new(x.link()),
+                    x.link_name().as_ref(),
+                    Path::new(x.target()),
                     self.reply(),
                 );
             }
